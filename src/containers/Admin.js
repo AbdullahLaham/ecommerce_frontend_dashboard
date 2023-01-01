@@ -1,14 +1,14 @@
-import { useTheme, Box } from '@mui/material'
-import Header from 'components/Header';
 import React from 'react'
-import { useGetCustomersQuery } from 'state/api';
+import {Box, useTheme} from '@mui/material';
+import { useGetAdminsQuery } from '../state/api';
+import Header from 'components/Header';
 import { DataGrid } from '@mui/x-data-grid';
+import CustomColumnMenu from 'components/CustomColumnMenu';
 
-
-const Customers = () => {
+const Admin = () => {
+    const {data, isLoading} = useGetAdminsQuery();
+    console.log('admins', data);
     const theme = useTheme();
-    const {data, isLoading} = useGetCustomersQuery();
-    console.log('dataaaaa', data);
     const columns = [
         {
             field: '_id',
@@ -51,8 +51,7 @@ const Customers = () => {
     ]
   return (
     <Box  ml='2rem'>
-        <Header title='CUSTOMERS' subtitle='list of customers' />
-        {/* to see the data you have to specify the height of the box contsiner of DataGrid */}
+        <Header title='ADMINS' subtitle='Managing Admins and list of Admins' />
         <Box sx={{
           
           "& .MuiDataGrid-virtualScroller": {
@@ -64,10 +63,12 @@ const Customers = () => {
             borderTop: "none",
           },
         }} mt='1rem' height='75vh'>
-            <DataGrid rows={data || []} getRowId={(row) => row._id} loading={isLoading || !data} columns={columns} />
+            <DataGrid rows={data || []} getRowId={(row) => row._id} loading={isLoading || !data} columns={columns} components={{
+            ColumnMenu: CustomColumnMenu,
+          }} />
         </Box>
     </Box>
   )
 }
 
-export default Customers;
+export default Admin

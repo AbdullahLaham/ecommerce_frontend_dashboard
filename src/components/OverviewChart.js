@@ -2,9 +2,9 @@ import React, { useMemo } from 'react'
 import { ResponsiveLine } from '@nivo/line';
 import { useTheme } from '@mui/material';
 import { useGetOverviewQuery } from '../state/api';
-import Dashboard from './Dashboard';
+import Dashboard from '../containers/Dashboard';
 
-const OverviewChart = ({ isDashboard = false, view }) => {
+const OverviewChart = ({ view, isDashboard = false, }) => {
     // this chart from https://nivo.rocks/line/
     const {data, isLoading} = useGetOverviewQuery();
     console.log('ff', data)
@@ -84,6 +84,7 @@ const OverviewChart = ({ isDashboard = false, view }) => {
                 },
                 orient: 'bottom',
                 tickSize: 5,
+                
                 tickPadding: 5,
                 tickRotation: 0,
                 legend: isDashboard ? '' : `Total ${view == 'sales' ? 'Sales' : 'Units'}` ,                
@@ -93,6 +94,7 @@ const OverviewChart = ({ isDashboard = false, view }) => {
             axisLeft={{
                 orient: 'left',
                 tickSize: 5,
+                tickValues: 5,
                 tickPadding: 5,
                 tickRotation: 0,
                 legend: 'count',
