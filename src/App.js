@@ -21,6 +21,7 @@ import Admin from 'containers/Admin';
 import Performance from 'containers/Performance';
 import LoginPage from 'containers/LoginPage';
 import SignupPage from 'containers/SignupPage';
+import AddProduct from 'containers/AddProduct';
 function App() {
   const mode = useSelector(state => state.global.mode);
   // The useMemo and useCallback Hooks are similar. The main difference is that useMemo returns a memoized value and useCallback returns a memoized function. You can learn more about useCallback in the useCallback chapter.
@@ -34,7 +35,8 @@ function App() {
           <CssBaseline />
             <Routes>
               <Route element={<Layout />} >
-                <Route path='/' element={<Navigate to='/dashboard' replace />} />
+                {/* <Route path='/' element={<Navigate to='/dashboard' replace />} /> */}
+                <Route path='/' element={<LoginPage />} />
                 <Route path='/dashboard' element={<Dashboard />} />
                 <Route path='/products' element={<Products />} />
                 <Route path='/customers' element={<Customers />} />
@@ -48,6 +50,7 @@ function App() {
                 <Route path='/performance' element={<Performance />} />
                 <Route path='/login' element={<LoginPage />} />
                 <Route path='/signup' element={<SignupPage />} />
+                <Route path='/createProduct' element={<AddProduct />} />
               </Route>
             </Routes>
         </ThemeProvider>

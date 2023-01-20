@@ -1,9 +1,9 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
 export const api = createApi({
-    baseQuery: fetchBaseQuery({baseUrl: process.env.REACT_BASE_URL || 'http://localhost:5000'}),
+    baseQuery: fetchBaseQuery({baseUrl: process.env.REACT_BASE_URL || 'https://node-express-api-vercel-neon.vercel.app'}),
     reducerPath: "adminApi",
-    tagTypes: ["User", "Products", "Customers", "Transactions", "Geography", "Overview", "Admins", "Performance", "Dashboard"],
+    tagTypes: ["User", "Products", "Customers", "Transactions", "Geography", "Overview", "Admins", "Performance", "Dashboard", 'CraeteProducts', 'Login'],
     endpoints: (build) => ({
         getUser: build.query({
             query: (id) => `general/user/${id}`,
@@ -13,10 +13,10 @@ export const api = createApi({
             query: () => 'client/products',
             providesTags: ['Products'],
         }),
-        getCustomers: build.query({
+        getCustomers: build.query( {
             query: () => 'client/customers',
             providesTags: ["Customers"],
-        }),
+        } ),
         getTransactions: build.query({
             query: ({page, pageSize, sort, search}) => ({
                 url: "client/transactions",
@@ -44,12 +44,20 @@ export const api = createApi({
         getDashboardData: build.query({
             query: () => 'general/dashboard',
             providesTags: ['Dashboard']
+        }),
+        setNewProduct: build.query({
+            query: () => 'management/createProduct',
+            providesTags: ['CraeteProducts']
+        }),
+        loginToTheSystem: build.query({
+            query: () => 'management/loginDashboard',
+            providesTags: ['Login'],
         })
 
     })
 });
 
-export const {useGetUserQuery, useGetProductsQuery, useGetCustomersQuery, useGetTransactionsQuery, useGetGeographyQuery, useGetOverviewQuery, useGetAdminsQuery, useGetUserPerformanceQuery, useGetDashboardDataQuery} = api;
+export const {useGetUserQuery, useGetProductsQuery, useGetCustomersQuery, useGetTransactionsQuery, useGetGeographyQuery, useGetOverviewQuery, useGetAdminsQuery, useGetUserPerformanceQuery, useGetDashboardDataQuery, useSetNewProductQuery, useLoginToTheSystemQuery} = api;
 
 
 
