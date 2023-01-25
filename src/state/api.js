@@ -1,7 +1,7 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
 export const api = createApi({
-    baseQuery: fetchBaseQuery({baseUrl: 'http://localhost:5000/'}),
+    baseQuery: fetchBaseQuery({baseUrl: 'https://ecommerce-backend-dashboard.vercel.app/'}),
     reducerPath: "adminApi",
     tagTypes: ["User", "Products", "Customers", "Transactions", "Geography", "Overview", "Admins", "Performance", "Dashboard", 'CraeteProducts', 'Login'],
     endpoints: (build) => ({
